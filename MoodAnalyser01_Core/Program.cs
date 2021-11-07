@@ -6,8 +6,7 @@ namespace MoodAnalyser01_Core
     {
         static void Main(string[] args)
         {
-            MoodAnalyser mood = new MoodAnalyser("I am happy");
-            Console.WriteLine(mood.AnalyseMood());
+            Console.WriteLine("Welcome to the mood analyser program");
         }
     }
 }

@@ -41,5 +41,24 @@ namespace MoodAnalyser01Test_Core
             //Assert
             Assert.AreEqual(expected, mood);
         }
+
+        [TestMethod]
+
+        //TC 2.1 Given? NULL should return HAPPY.
+        //this is the test case of UC2
+        //the data roew command takes the input one after the other
+        [DataRow (null)]
+        public void GivenNullshouldreturnHappy(string message)
+        {
+            //Arrange
+            string expected = "HAPPY";
+            MoodAnalyser moodAnalysis = new MoodAnalyser(message);
+
+            //Act
+            string mood = moodAnalysis.AnalyseMood();
+
+            //Assert
+            Assert.AreEqual(expected, mood);
+        }
     }
 }

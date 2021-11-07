@@ -17,11 +17,19 @@ namespace MoodAnalyser01_Core
 
         public string AnalyseMood()                  //declaring the analyse mood method
         {
-            if(this.message.Contains("sad"))
+            try                                      //the try and catch block is for exception handling
             {
-                return "SAD";
+                if (this.message.Contains("sad"))
+                {
+                    return "SAD";
+                }
+                else
+                {
+                    return "HAPPY";
+                }
             }
-            else
+
+            catch
             {
                 return "HAPPY";
             }
