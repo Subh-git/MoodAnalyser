@@ -19,7 +19,13 @@ namespace MoodAnalyser01_Core
         {
             try                                      //the try and catch block is for exception handling
             {
-                if (this.message.Contains("sad"))
+                //this is the custom exception that we declared for checking empty messages. exception type is an enum followed by the message.
+                if (this.message.Equals(string.Empty))
+                {
+                    throw new CustomMoodAnException(CustomMoodAnException.ExceptionType.EMPTY_MESSAGE, "Mood should not be Empty"); 
+                }
+
+                if (this.message.ToLower().Contains("sad"))
                 {
                     return "SAD";
                 }
@@ -29,9 +35,9 @@ namespace MoodAnalyser01_Core
                 }
             }
 
-            catch
+            catch (NullReferenceException)                  //this shows that it should not be null. NullREferenceException is a predefined exception class
             {
-                return "HAPPY";
+                throw new CustomMoodAnException(CustomMoodAnException.ExceptionType.NULL_VALUE, "Mood can not be null");
             }
         }
     }
