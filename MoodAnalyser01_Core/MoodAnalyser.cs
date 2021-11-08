@@ -15,6 +15,11 @@ namespace MoodAnalyser01_Core
             this.message = message;
         }
 
+        public MoodAnalyser()                //initialising the default constructor
+        {
+            this.message = null;
+        }
+
         public string AnalyseMood()                  //declaring the analyse mood method
         {
             try                                      //the try and catch block is for exception handling
