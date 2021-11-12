@@ -111,7 +111,18 @@ namespace MoodAnalyser01_Core
                 throw new CustomMoodAnException(CustomMoodAnException.ExceptionType.NULL_VALUE, "method not found");
             }
         }
-
+        /// <summary>
+        /// Setfields the specified message.
+        /// </summary>
+        /// <param name="message">The message.</param>
+        /// <param name="fieldName">Name of the field.</param>
+        /// <returns></returns>
+        /// <exception cref="MoodAnalyser01_Core.CustomMoodAnException">
+        /// Message should not be null
+        /// or
+        /// Field not found
+        /// </exception>
+        /// This is UC 7 of Dynamically changing mood
         public static string Setfield(string message, string fieldName)
         {
             try
@@ -129,7 +140,7 @@ namespace MoodAnalyser01_Core
 
             catch (NullReferenceException)
             {
-                throw new CustomMoodAnException(CustomMoodAnException.ExceptionType.NO_SUCH_FIELD, "Field should not be null");
+                throw new CustomMoodAnException(CustomMoodAnException.ExceptionType.NO_SUCH_FIELD, "Field not found");
             }
         }
     }

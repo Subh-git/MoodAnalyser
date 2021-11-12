@@ -8,7 +8,7 @@ namespace MoodAnalyser01_Core
 {
    public class MoodAnalyser
     {
-        private string message;        //the private message field of the mood analyser class
+        public string message;        //the public message field of the mood analyser class
         
         public MoodAnalyser(string message)        //initialising the parameterised constructor
         {
