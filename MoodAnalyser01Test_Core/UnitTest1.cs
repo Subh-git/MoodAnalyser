@@ -102,7 +102,7 @@ namespace MoodAnalyser01Test_Core
         {
             string message = null;
             object expected = new MoodAnalyser(message);
-            object obj = MoodAnalyserFactory.CreateMoodAnalyse("MoodAnalyser01_Core.MoodAnalyser", "MoodAnalyser");
+            object obj = MoodAnalyserReflector.CreateMoodAnalyse("MoodAnalyser01_Core.MoodAnalyser", "MoodAnalyser");
             expected.Equals(obj);
         }
 
@@ -115,7 +115,7 @@ namespace MoodAnalyser01Test_Core
             {
                 string message = null;
                 object expected = new MoodAnalyser(message);
-                object obj = MoodAnalyserFactory.CreateMoodAnalyse("MoodAnalyser01_Core.MoodAnalyserWrong", "MoodAnalyserWrong");
+                object obj = MoodAnalyserReflector.CreateMoodAnalyse("MoodAnalyser01_Core.MoodAnalyserWrong", "MoodAnalyserWrong");
                 expected.Equals(obj);
             }
 
@@ -134,7 +134,7 @@ namespace MoodAnalyser01Test_Core
             {
                 string message = null;
                 object expected = new MoodAnalyser(message);
-                object obj = MoodAnalyserFactory.CreateMoodAnalyse("MoodAnalyser01_Core.MoodAnalyser", "MoodAnalyserWrong");
+                object obj = MoodAnalyserReflector.CreateMoodAnalyse("MoodAnalyser01_Core.MoodAnalyser", "MoodAnalyserWrong");
                 expected.Equals(obj);
             }
 
@@ -151,7 +151,7 @@ namespace MoodAnalyser01Test_Core
         public void Given_ParameterisedConstructor_MoodAnalyseClassName_Should_return_MoodAnalyseObject()
         {
             object expected = new MoodAnalyser("HAPPY");
-            object obj = MoodAnalyserFactory.CreateMoodAnalyserParameterisedConstructor("MoodAnalyser01_Core.MoodAnalyser", "MoodAnalyser");
+            object obj = MoodAnalyserReflector.CreateMoodAnalyserParameterisedConstructor("MoodAnalyser01_Core.MoodAnalyser", "MoodAnalyser", "Happy");
             expected.Equals(obj);
         }
 
@@ -164,7 +164,7 @@ namespace MoodAnalyser01Test_Core
             try
             {
                 object expected = new MoodAnalyser("HAPPY");
-                object obj = MoodAnalyserFactory.CreateMoodAnalyserParameterisedConstructor("MoodAnalyser01_Core.MoodAnalyserWrong", "MoodAnalyser");
+                object obj = MoodAnalyserReflector.CreateMoodAnalyserParameterisedConstructor("MoodAnalyser01_Core.MoodAnalyserWrong", "MoodAnalyser", "Happy");
                 expected.Equals(obj);
             }
 
@@ -182,7 +182,7 @@ namespace MoodAnalyser01Test_Core
             try
             {
                 object expected = new MoodAnalyser("HAPPY");
-                object obj = MoodAnalyserFactory.CreateMoodAnalyserParameterisedConstructor("MoodAnalyser01_Core.MoodAnalyser", "MoodAnalyserWrong");
+                object obj = MoodAnalyserReflector.CreateMoodAnalyserParameterisedConstructor("MoodAnalyser01_Core.MoodAnalyser", "MoodAnalyserWrong", "Happy");
                 expected.Equals(obj);
             }
 
@@ -191,5 +191,38 @@ namespace MoodAnalyser01Test_Core
                 Assert.AreEqual("Constructor not found", e.Message);
             }
         }
+
+        [TestMethod]
+        //below is the test case of UC 6
+        //test Case 6.1
+        //in this test case we are passing the happy message and the method name- Analyse mood in the reflector class method = Invoke Analyse mood
+        //this in turn invokes the custom parameterised constructor method from the reflector class.
+        public void GivenHappy_ShouldReturn_Happy_ReflectorInvoke_method()
+        {
+            string expected = "HAPPY";
+            string mood = MoodAnalyserReflector.InvokeAnalyseMood("Happy", "AnalyseMood");
+            Assert.AreEqual(expected, mood);
+        }
+
+        [TestMethod]
+        //below is the test case of UC 6
+        //test Case 6.2
+        //passing the wrong method name should return the message that method does not exist. 
+        //exceptoon should be triggered
+        public void GivenHappy_ShouldReturnException_WithWrongMethodName()
+        {
+            try
+            {
+                string expected = "method not found";
+                string mood = MoodAnalyserReflector.InvokeAnalyseMood("Happy", "AnalyseMoodWrong");
+                Assert.AreEqual(expected, mood);
+            }
+
+            catch (CustomMoodAnException e)
+            {
+                Assert.AreEqual("method not found", e.Message);
+            }
+        }
+
     }
 }
